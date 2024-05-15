@@ -273,3 +273,115 @@ unsorted_list = [randint(1,50) for _ in range(10)]
 print(unsorted_list)
 sorted_list = sorted(unsorted_list)
 print(sorted_list)
+
+line_break()
+line_break()
+
+# Search Algorithms
+
+# Linear Search
+# Time Complexity - Linear Time O(n)
+
+def linear_search(lst, target):
+    num_checks = 0
+    # Starting at index 0 through the last index in the list
+    for i in range(len(lst)):
+        num_checks += 1
+        # If the list at index i is equal to the target for which we are searching
+        if lst[i] == target:
+            # Return the index i 
+            return f"{target} can be found at index {i} and it took {num_checks} checks"
+    # if we get through the entire list, the target is not in the list
+    print('Not Found, checks:', num_checks)
+    return -1
+
+
+nums = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75]
+
+print(linear_search(nums, 30))
+print(linear_search(nums, 5))
+print(linear_search(nums, 50))
+print(linear_search(nums, 32))
+
+
+line_break()
+# Binary Search
+# Must be on a SORTED list!
+
+def binary_search(lst, target):
+    # Set a low and high point on the list
+    low = 0
+    high = len(lst) - 1
+    num_checks = 0
+    # Keep finding the middle element as long as low is less than or equalt to high
+    while low <= high:
+        # Get the middle of low + high
+        mid = (low + high) // 2
+        num_checks += 1
+        # Check if the target is the mid
+        if target == lst[mid]:
+            return f"{target} can be found at index {mid} and it took {num_checks} checks"
+        # if the target is greater than the mid point
+        elif target > lst[mid]:
+            # Set the low to be one higher than mid
+            low = mid + 1
+        # if the target is lower than mid
+        else:
+            # Set the high to be one lower than mid
+            high = mid - 1
+    # if low ever passes high, we know the target is not there
+    print('Not Found, checks:', num_checks)
+    return -1
+
+nums = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75]
+
+print(binary_search(nums, 30))
+print(binary_search(nums, 5))
+print(binary_search(nums, 50))
+print(binary_search(nums, 32))
+
+
+
+really_big_list = [x for x in range(0, 5000, 5)]
+
+
+print(linear_search(really_big_list, 1234))
+print(binary_search(really_big_list, 1234))
+
+line_break()
+
+# In Class Exercise # 1
+
+print('''
+You have been tasked with enhancing the video streaming platform by adding sorting functionalities to enable users to sort their playlists efficiently. Users should be able to sort their playlists alphabetically by video title using the bubble sort algorithm.
+
+1. Implement a sorting function named **`sort_videos`** that sorts videos in playlists alphabetically by title using the bubble sort algorithm.
+2. The **`sort_videos`** function:
+    - Receive a list of dictionaries containing the playlist as input.
+    - Iterate through the playlist to compare the titles of adjacent videos.
+3. Test the **`sort_videos`** function with a sample playlist to ensure correctness and efficiency.
+4. *Optional BONUS* add a second parameter (default to "title") that will sort by that field (e.g. "duration")
+''')
+
+playlist = [
+    {"title": "Video X", "duration": 180, "upload_date": "2022-01-01"},
+    {"title": "Video A", "duration": 240, "upload_date": "2021-12-15"},
+    {"title": "Video Z", "duration": 200, "upload_date": "2022-01-10"},
+]
+
+def sort_videos(videos, field='title'):
+    swapped = True
+    num_ordered = 0
+    while swapped:
+        swapped = False
+        for i in range(len(videos) - 1 - num_ordered):
+            if videos[i][field] > videos[i+1][field]:
+                videos[i], videos[i+1] = videos[i+1], videos[i]
+                swapped = True
+        num_ordered += 1
+    return videos
+
+
+print(sort_videos(playlist, 'duration'))
+
+line_break()
