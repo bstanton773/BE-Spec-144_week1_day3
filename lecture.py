@@ -164,6 +164,62 @@ print(unsorted_list)
 
 line_break()
 
+# Merge Sort - 
+# Worst Case - O(n log n) Time Complexity
+# Best Case - O(n log n) Time Complexity
+# Space Complexity - O(n) Linear
+
 print('Merge Sort:')
 unsorted_list = [randint(1,50) for _ in range(8)]
+
+def merge_sort(lst):
+    # Check if our list can be split in half
+    if len(lst) > 1:
+        # Find the midway point
+        mid = len(lst) // 2
+        # Split the list into a left and right
+        left_half = lst[:mid]
+        right_half = lst[mid:]
+
+        # Call merge_sort on left half
+        merge_sort(left_half)
+        # Call merge_sort on right half
+        merge_sort(right_half)
+
+        # Merge the left and right half lists back into the original list
+        # index pointers for the three lists
+        l = 0 # pointer for left half
+        r = 0 # pointer for right half
+        m = 0 # pointer for main list (lst)
+
+        # While the left and right pointers are still pointing at valid indices
+        while l < len(left_half) and r < len(right_half):
+            # Compare the value at left pointer vs right pointer 
+            if left_half[l] < right_half[r]:
+                # Copy the left half value into the main list
+                lst[m] = left_half[l]
+                # Move the left pointer right one spot
+                l += 1
+            else:
+                # Copy the right half value into the main list
+                lst[m] = right_half[r]
+                # Move the right pointer right one spot
+                r += 1
+            # Either way, we always increse the main pointer one spot
+            m += 1
+
+        # When one half finishes (either left or right), copy the rest of the other half into the original
+        while l < len(left_half):
+            lst[m] = left_half[l]
+            l += 1
+            m += 1
+        while r < len(right_half):
+            lst[m] = right_half[r]
+            r += 1
+            m += 1
+    return lst
+
 print(unsorted_list)
+merge_sort(unsorted_list)
+print(unsorted_list)
+
