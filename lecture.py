@@ -223,3 +223,53 @@ print(unsorted_list)
 merge_sort(unsorted_list)
 print(unsorted_list)
 
+
+line_break()
+
+# Quick Sort - 
+# Worst Case - O(n**2) Time Complexity
+# Best Case - O(n log n) Time Complexity
+# Space Complexity - O(log n) Linear
+
+print('Quick Sort:')
+unsorted_list = [randint(1,50) for _ in range(10)]
+
+def quick_sort(lst):
+    if len(lst) <= 1:
+        return lst
+    # Find a pivot value - can be any of the elements - we will choose the middle
+    mid_idx = len(lst)//2
+    pivot = lst[mid_idx]
+    # Get all of the elements that are less than the pivot
+    left = [x for x in lst if x < pivot]
+    # Get all of the elements that are equal to the pivot
+    middle = [x for x in lst if x == pivot]
+    # Get all of the elements that are greater than the pivot
+    right = [x for x in lst if x > pivot]
+
+    # Sort the left in the same way
+    sorted_left = quick_sort(left)
+    # Sort the right in the same way
+    sorted_right = quick_sort(right)
+
+    return sorted_left + middle + sorted_right
+
+
+print(unsorted_list)
+sorted_list = quick_sort(unsorted_list)
+print(unsorted_list)
+print(sorted_list)
+
+
+line_break()
+# Timsort - sorted()
+# Worst Case - O(n log n) Time Complexity
+# Best Case - O(n) Time Complexity
+# Space Complexity - O(n) Linear
+
+print('Tim Sort:')
+unsorted_list = [randint(1,50) for _ in range(10)]
+
+print(unsorted_list)
+sorted_list = sorted(unsorted_list)
+print(sorted_list)
